@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import json
+import seaborn as sns
 
 # Set the title and header image
 st.title(':rocket: Telegram Dashboard')
@@ -26,3 +27,9 @@ with st.expander("Upload JSON File"):
         with open(file_path, 'r') as f:
             data = json.load(f)
             st.json(data)
+            
+file_path = 'data/result.json'
+with open(file_path, 'r') as f:
+    data = json.load(f)
+    
+st.pyplot(sns.histplot(Counter(data['messages']), bins=50, kde=True))
